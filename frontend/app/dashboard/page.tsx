@@ -4,6 +4,7 @@ import GuidelinesUpload from "@/components/guidelines-upload";
 import MedicalRecordUpload from "@/components/medical-record-upload";
 import { Button } from "@/components/ui/button";
 import { useDashboard } from "@/context/dashboard-context";
+import useCaseIdQuery from "@/hooks/queries/use-case-id-query";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
 
@@ -11,12 +12,7 @@ export const revalidate = 0;
 
 export default function DashboardRoot() {
     const { medicalRecord, guidelinesFile } = useDashboard();
-    const router = useRouter();
-    const CASE_ID = "case_891a_6fbl_87d1_4326";
-
-    const handleContinue = () => {
-        router.push(`/dashboard/case/${CASE_ID}`);
-    };
+    const { handleContinue } = useCaseIdQuery();
 
     const buttonClass = classNames({
         "bg-blue-500": medicalRecord && guidelinesFile,
