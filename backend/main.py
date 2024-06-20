@@ -1,4 +1,4 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 import uuid
@@ -74,7 +74,10 @@ def create_case(background_tasks: BackgroundTasks):
 
 @app.get("/cases/{case_id}")
 def get_case(case_id: str):
-    return cases.get(case_id, {"error": "Case not found"})
+    case = cases.get(case_id)
+    if case is None:
+        raise HTTPException(status_code=404, detail="Case not found")
+    return case
 
 @app.get("/cases")
 def get_all_cases():
