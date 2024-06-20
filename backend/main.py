@@ -59,7 +59,7 @@ async def run_background_process(case_id: str):
 def create_case(background_tasks: BackgroundTasks):
    case_id = str(uuid.uuid4())
    case = {
-        "id": case_id,
+        "case_id": case_id,
         "created_at": datetime.utcnow().isoformat(),
         "status": "submitted",
         "summary": None,
