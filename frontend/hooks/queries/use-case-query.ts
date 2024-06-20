@@ -2,17 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-
-interface CaseQueryResponse {
-    id: string;
-}
+import type { CaseResponse } from "@/types/case-response";
 
 function useCaseQuery(caseId: string) {
     const { toast } = useToast();
     const router = useRouter();
     const queryKey = ["caseId", caseId];
 
-    const queryFn = async (): Promise<CaseQueryResponse> => {
+    const queryFn = async (): Promise<CaseResponse> => {
         try {
             const response = await fetch(
                 `http://localhost:8000/cases/${caseId}`
@@ -22,7 +19,7 @@ function useCaseQuery(caseId: string) {
                 throw new Error("Error fetching case");
             }
 
-            const data = (await response.json()) as CaseQueryResponse;
+            const data = (await response.json()) as CaseResponse;
             return data;
         } catch (error) {
             toast({
