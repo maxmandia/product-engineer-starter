@@ -4,15 +4,14 @@ import GuidelinesUpload from "@/components/guidelines-upload";
 import MedicalRecordUpload from "@/components/medical-record-upload";
 import { Button } from "@/components/ui/button";
 import { useDashboard } from "@/context/dashboard-context";
-import useCaseIdQuery from "@/hooks/queries/use-case-id-query";
+import useCaseIdMutation from "@/hooks/mutations/use-case-id-mutation";
 import classNames from "classnames";
-import { useRouter } from "next/navigation";
 
 export const revalidate = 0;
 
 export default function DashboardRoot() {
     const { medicalRecord, guidelinesFile } = useDashboard();
-    const { handleContinue } = useCaseIdQuery();
+    const { mutate: handleContinue } = useCaseIdMutation();
 
     const buttonClass = classNames({
         "bg-blue-500": medicalRecord && guidelinesFile,
@@ -28,7 +27,7 @@ export default function DashboardRoot() {
             </div>
 
             <div className="w-full py-4 flex flex-row justify-center">
-                <Button className={buttonClass} onClick={handleContinue}>
+                <Button className={buttonClass} onClick={() => handleContinue()}>
                     Continue
                 </Button>
             </div>
