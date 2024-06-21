@@ -3,7 +3,7 @@ import AnteriorIcon from "@/public/anterior.svg";
 
 function Header() {
     return (
-        <div className="p-10">
+        <div className="p-6">
             <AnteriorIcon />
         </div>
     );

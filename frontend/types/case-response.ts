@@ -1,12 +1,19 @@
 export interface CaseResponse {
+    created_at: string;
     case_id: string;
-    status: string;
+    status: CaseStatus;
     procedure_name: string;
     cpt_codes: string[];
     summary: string;
     is_met: boolean;
     is_complete: boolean;
     steps: Step[];
+}
+
+export enum CaseStatus {
+    SUBMITTED = "submitted",
+    PROCESSING = "processing",
+    COMPLETE = "complete"
 }
 
 interface Step {
