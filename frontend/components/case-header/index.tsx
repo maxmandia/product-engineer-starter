@@ -5,6 +5,7 @@ import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import CptDrawer from "../cpt-drawer";
 import { CheckCheckIcon, PackageSearchIcon, SendIcon, XIcon } from "lucide-react";
 import { Loader2 } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 function renderEmoji(status: CaseStatus) {
     switch (status) {
@@ -17,7 +18,11 @@ function renderEmoji(status: CaseStatus) {
     }
 }
 
-function CaseHeader({ data }: { data: CaseResponse }) {
+function CaseHeader({ data }: { data: CaseResponse | undefined }) {
+    if (!data) {
+        return <Skeleton className="h-[100px] w-full" />;
+    }
+
     return (
         <div className="flex flex-col items-start gap-4">
             <div className="w-full">

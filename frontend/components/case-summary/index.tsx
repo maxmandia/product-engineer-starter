@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 
-function CaseSummary({ summary }: { summary: string }) {
+function CaseSummary({ summary }: { summary: string | undefined }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
