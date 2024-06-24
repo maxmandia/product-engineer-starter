@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.markdown > * {
+    all: revert;
+}
+
 * {
     scroll-behavior: smooth;
 }

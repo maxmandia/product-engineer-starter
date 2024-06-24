@@ -16,7 +16,7 @@ export enum CaseStatus {
     COMPLETE = "complete"
 }
 
-interface Step {
+export interface Step {
     key: string;
     question: string;
     options: Option[];
