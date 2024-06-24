@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
+import { cn } from "@/lib/utils";
 
 function Step({ step, oneBasedIndex }: { step: Step; oneBasedIndex: number }) {
     const [areOptionsExpanded, setAreOptionsExpanded] = useState(false);
@@ -20,14 +21,27 @@ function Step({ step, oneBasedIndex }: { step: Step; oneBasedIndex: number }) {
             </CardHeader>
             <CardContent>
                 <div className="relative">
-                    <Badge className="absolute top-0 left-[74px] hover:bg-green-500 transform -translate-x-1/2 -translate-y-1/2 rounded-sm bg-green-500">
+                    <Badge
+                        className={cn(
+                            "absolute top-0 left-[74px] hover:bg-green-500 transform -translate-x-1/2 -translate-y-1/2 rounded-sm bg-green-500",
+                            !step.is_met ? "hover:bg-gray-500 bg-gray-500" : ""
+                        )}>
                         Selected Option{selectedOptions.length > 1 ? "s" : ""}
                     </Badge>
-                    <div className="flex flex-col gap-2 border-[2px] rounded-md border-green-500 p-4 bg-black/5">
+                    <div
+                        className={cn(
+                            "flex flex-col gap-2 border-[2px] rounded-md border-green-500 p-4 bg-black/5",
+                            !step.is_met ? "border-gray-500" : ""
+                        )}>
                         {selectedOptions.map((option, index) => (
                             <div key={index} className="flex items-center gap-2">
                                 <Checkbox
-                                    className="data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500"
+                                    className={cn(
+                                        "data-[state=checked]:bg-green-500 data-[state=checked]:border-green-5000",
+                                        !step.is_met
+                                            ? "data-[state=checked]:bg-gray-500 data-[state=checked]:border-gray-500"
+                                            : ""
+                                    )}
                                     checked={true}
                                 />
                                 <label className="text-gray-500" htmlFor="selected-option">
@@ -59,6 +73,11 @@ function Step({ step, oneBasedIndex }: { step: Step; oneBasedIndex: number }) {
                     </Button>
                 </div>
                 <div className="leading-relaxed max-w-none">
+                    {!step.is_met && (
+                        <p className="text-red-500 font-bold pt-5">
+                            The requirements for this procedure have not been met.
+                        </p>
+                    )}
                     <Markdown
                         className={`text-sm markdown ${
                             !isReasoningExpanded ? "line-clamp-[10]" : ""
