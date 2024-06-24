@@ -30,7 +30,7 @@ export default function MedicalRecordUpload() {
     );
 
     return (
-        <div className="w-1/2 h-64 border-4 border-gray-200 border-dashed rounded flex flex-row items-center justify-center">
+        <div className="p-10 min-w-[350px] border-4 border-gray-200 border-dashed rounded flex flex-row items-center justify-center">
             <Button disabled={isLoading} className={buttonClass} onClick={simulateUpload}>
                 {uploadButtonText}
             </Button>
